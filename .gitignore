@@ -14,3 +14,7 @@ web/assets/*
 
 bin/*
 vendor/*
+.idea
+.vagrant
+composer.phar
+
