@@ -28,6 +28,7 @@ end
 
 # Install the software we need.
 %w(
+mysql-server
 curl
 apache2
 libapache2-mod-php5
@@ -76,13 +77,33 @@ execute "check if date.timezone is Europe/Paris in /etc/php5/cli/php.ini?" do
   command "sed -i 's/;date.timezone =.*/date.timezone = Europe\\/Paris/g' /etc/php5/cli/php.ini"
 end
 
-bash "Running composer install and preparing the Sylius repository" do
-  not_if "test -e /vagrant/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/public"
-  user "vagrant"
-  cwd "/mnt/sylius"
-  code <<-EOH
-    set -e
-    curl -s https://getcomposer.org/installer | php
-    COMPOSER_VENDOR_DIR="/var/tmp/vendor" php composer.phar install --dev --prefer-dist --no-scripts
-  EOH
+#execute "doctrine:database:drop" do
+#  command "/mnt/sylius/sylius/console doctrine:database:drop --force"
+#end
+
+execute "doctrine:database:create" do
+  command "/mnt/sylius/sylius/console doctrine:database:create"
 end
+
+execute "doctrine:schema:create" do
+  command "/mnt/sylius/sylius/console doctrine:schema:create --em=default"
+end
+
+execute "doctrine:fixtures:load" do
+  command "/mnt/sylius/sylius/console doctrine:fixtures:load"
+end
+
+execute "assetic:dump" do
+  command "/mnt/sylius/sylius/console assetic:dump"
+end
+
+#bash "Running composer install and preparing the Sylius repository" do
+#  not_if "test -e /vagrant/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/public"
+#  user "vagrant"
+#  cwd "/mnt/sylius"
+#  code <<-EOH
+#    set -e
+#    curl -s https://getcomposer.org/installer | php
+#    COMPOSER_VENDOR_DIR="/var/tmp/vendor" php composer.phar install --dev --prefer-dist --no-scripts
+#  EOH
+#end
