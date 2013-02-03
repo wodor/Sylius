@@ -14,7 +14,7 @@ Vagrant::Config.run do |config|
   # doesn't already exist on the user's system.
   config.vm.box_url = "http://files.vagrantup.com/precise32.box"
 
-  config.vm.network :hostonly, "172.33.33.33"
+  config.vm.network :hostonly, "172.33.33.66"
   config.vm.share_folder "v-root", "/mnt/sylius", ".." , :nfs => true
 
   # Whithout this symlinks can't be created on the shared folder.
