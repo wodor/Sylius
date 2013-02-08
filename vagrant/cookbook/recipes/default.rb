@@ -77,25 +77,27 @@ execute "check if date.timezone is Europe/Paris in /etc/php5/cli/php.ini?" do
   command "sed -i 's/;date.timezone =.*/date.timezone = Europe\\/Paris/g' /etc/php5/cli/php.ini"
 end
 
+
 #execute "doctrine:database:drop" do
 #  command "/mnt/sylius/sylius/console doctrine:database:drop --force"
 #end
 
-execute "doctrine:database:create" do
-  command "/mnt/sylius/sylius/console doctrine:database:create"
-end
+#execute "doctrine:database:create" do
+#  command "/mnt/sylius/sylius/console doctrine:database:create"
+#  ignore_failure true
+#end
 
-execute "doctrine:schema:create" do
-  command "/mnt/sylius/sylius/console doctrine:schema:create --em=default"
-end
-
-execute "doctrine:fixtures:load" do
-  command "/mnt/sylius/sylius/console doctrine:fixtures:load"
-end
-
-execute "assetic:dump" do
-  command "/mnt/sylius/sylius/console assetic:dump"
-end
+#execute "doctrine:schema:create" do
+#  command "/mnt/sylius/sylius/console doctrine:schema:create --em=default"
+#end
+#
+#execute "doctrine:fixtures:load" do
+#  command "/mnt/sylius/sylius/console doctrine:fixtures:load"
+#end
+#
+#execute "assetic:dump" do
+#  command "/mnt/sylius/sylius/console assetic:dump --symlinks"
+#end
 
 #bash "Running composer install and preparing the Sylius repository" do
 #  not_if "test -e /vagrant/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/public"

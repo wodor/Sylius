@@ -15,6 +15,7 @@ Vagrant::Config.run do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise32.box"
 
   config.vm.network :hostonly, "172.33.33.66"
+  config.vm.forward_port 3306, 3309
   config.vm.share_folder "v-root", "/mnt/sylius", ".." , :nfs => true
 
   # Whithout this symlinks can't be created on the shared folder.
