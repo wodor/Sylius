@@ -1,11 +1,16 @@
 Feature: User registration
-    In order to track my buyings
+    In order to order products
     As a visitor
-    I need to be able to create an account in store
+    I need to be able to create an account in the store
+
+    Background:
+        Given there are following users:
+            | username | password |
+            | bar      | foo      |
 
     Scenario: Successfully creating account in store
-        Given I am on the homepage
-         When I follow "Register"
+        Given I am on the store homepage
+          And I follow "Register"
          When I fill in the following:
             | Email        | foo@bar.com |
             | Username     | foo         |
@@ -16,8 +21,8 @@ Feature: User registration
         And I should see "Logout"
 
     Scenario: Trying to register with non verified password
-        Given I am on the homepage
-         When I follow "Register"
+        Given I am on the store homepage
+          And I follow "Register"
          When I fill in the following:
             | Email        | foo@bar.com |
             | Username     | foo         |

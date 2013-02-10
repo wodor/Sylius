@@ -1,7 +1,7 @@
 Feature: Products
+    In order to create my offer
     As a store owner
     I want to be able to manage products
-    In order to create my offer
 
     Background:
         Given I am logged in as administrator
@@ -10,8 +10,8 @@ Feature: Products
             | T-Shirt color | Color        | Red, Blue, Green |
             | T-Shirt size  | Size         | S, M, L          |
           And there are following properties:
-            | name               | presentation |
-            | T-Shirt fabric     | T-Shirt      |
+            | name           | presentation |
+            | T-Shirt fabric | T-Shirt      |
           And the following products exist:
             | name          | price | options                     | properties             |
             | Super T-Shirt | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric: Wool   |
