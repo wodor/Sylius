@@ -18,3 +18,4 @@ vendor/*
 .vagrant
 composer.phar
 
+/app
